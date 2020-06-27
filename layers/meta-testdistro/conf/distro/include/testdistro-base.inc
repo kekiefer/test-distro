@@ -106,3 +106,7 @@ IMAGE_CLASSES_append_tegra = " tegrasign"
 PREFERRED_PROVIDER_virtual/secure-os_tegra186 = "tos-keystore"
 PREFERRED_PROVIDER_virtual/secure-os_tegra194 = "tos-keystore"
 PREFERRED_RPROVIDER_libdevmapper = "lvm2"
+
+INITRAMFS_IMAGE_secureboot ?= "td-initramfs"
+MACHINE_EXTRA_RDEPENDS_append_secureboot = " lvm2-udevrules"
+CORE_IMAGE_EXTRA_INSTALL_append_secureboot = " ${@'systemd-conf-prod' if d.getVar('INIT_MANAGER') == 'systemd' else ''}"
