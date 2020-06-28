@@ -3,26 +3,25 @@ test-distro
 
 Test distro for exercising the autobuilder and metdata layer changes.
 
-# Security Options
-
-The default build requires a proprietary signing setup for secure boot
-and signing.  To remove these requirements, specify:
-
-`SECURITY_OPTIONS=""` in your environment or local.conf
-
-# Mender Hack Build
+# Mender Build
 
 Building a mender supported build:
 
 ```
 git checkout --track origin/master+wip-mender
 git submodule update --init
-source setup-env
+source setup-env -m jetson-tx2 -d testdistro-mender build-mender
 ```
 
-In your local.conf
+Note: only cboot is support at this time. Specify the following in your local.conf
+if you are using a machine such at jetson-tx2 that uses u-boot by default.
+
 ```
-SECURITY_OPTIONS = ""
-MACHINE ?= "jetson-tx2-cboot"
-DISTRO ?= "testdistro-mender"
+PREFERRED_PROVIDER_virtual/bootloader = "cboot-prebuilt"
+```
+
+Then build an image:
+
+```
+bitbake core-image-base -k
 ```
