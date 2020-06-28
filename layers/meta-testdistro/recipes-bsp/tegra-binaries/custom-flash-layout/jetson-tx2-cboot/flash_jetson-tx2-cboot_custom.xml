@@ -198,6 +198,7 @@
             <allocation_attribute> 0x8 </allocation_attribute>
             <percent_reserved> 0 </percent_reserved>
             <align_boundary> 4096 </align_boundary>
+            <filename> APPFILE </filename>
         </partition>
         <partition name="MBPNAME" type="MBPTYPE" oem_sign="true">
             <allocation_policy> sequential </allocation_policy>
@@ -491,6 +492,7 @@
             <allocation_attribute> 0x8 </allocation_attribute>
             <percent_reserved> 0 </percent_reserved>
             <align_boundary> 4096 </align_boundary>
+            <filename> APPFILE </filename>
         </partition>
         <partition name="DATA" type="data">
             <allocation_policy> sequential </allocation_policy>
