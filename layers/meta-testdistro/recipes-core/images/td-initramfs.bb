@@ -32,8 +32,6 @@ SYSTEMD_DEFAULT_TARGET = "initrd.target"
 
 inherit core-image
 
-IMAGE_FSTYPES = "${INITRAMFS_FSTYPES}"
-
 SSTATE_SKIP_CREATION_task-image-complete = "0"
 SSTATE_SKIP_CREATION_task-image-qa = "0"
 do_image_complete[vardepsexclude] += "rm_work_rootfs"
