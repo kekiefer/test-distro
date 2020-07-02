@@ -24,5 +24,5 @@
 	branch = dunfell-test
 [submodule "repos/meta-mender-community"]
 	path = repos/meta-mender-community
-	url = https://github.com/Trellis-Logic/meta-mender-community
-	branch = dunfell-l4t-r32.4.2
+	url = https://github.com/BoulderAI/meta-mender-community.git
+	branch = dunfell
