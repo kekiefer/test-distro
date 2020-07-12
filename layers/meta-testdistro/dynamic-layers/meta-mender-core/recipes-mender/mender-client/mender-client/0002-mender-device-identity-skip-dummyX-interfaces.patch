@@ -1,0 +1,31 @@
+From 12a62f2268ff0d1572fd8bbea0cc2946e8683006 Mon Sep 17 00:00:00 2001
+From: Matt Madison <matt@madison.systems>
+Date: Sat, 28 Dec 2019 05:47:09 -0800
+Subject: [PATCH 2/3] mender-device-identity: skip dummyX interfaces
+
+which are virtual interfaces, not suitable for device identity.
+
+Signed-off-by: Matt Madison <matt@madison.systems>
+---
+ support/mender-device-identity | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/support/mender-device-identity b/support/mender-device-identity
+index 4be4af8..59a3122 100755
+--- a/support/mender-device-identity
++++ b/support/mender-device-identity
+@@ -39,6 +39,11 @@ for dev in $SCN/*; do
+         continue
+     fi
+ 
++    # Skip dummy interfaces
++    if echo "$dev" | grep -q "$SCN/dummy" 2>/dev/null; then
++	continue
++    fi
++
+     idx=$(cat $dev/ifindex)
+     if [ $idx -lt $min ]; then
+         min=$idx
+-- 
+2.26.2
+
