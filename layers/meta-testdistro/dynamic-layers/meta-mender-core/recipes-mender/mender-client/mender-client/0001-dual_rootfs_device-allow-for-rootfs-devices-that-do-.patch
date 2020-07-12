@@ -1,0 +1,36 @@
+From 9c2367161959a7dfc0158c99f121b2fd38ca9b0e Mon Sep 17 00:00:00 2001
+From: Matt Madison <matt@madison.systems>
+Date: Sat, 28 Dec 2019 05:28:28 -0800
+Subject: [PATCH 1/3] dual_rootfs_device: allow for rootfs devices that do not
+ contain partition numbers
+
+For handling a setup with dm-crypt rootfs partitions.
+
+Signed-off-by: Matt Madison <matt@madison.systems>
+---
+ installer/dual_rootfs_device.go | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/installer/dual_rootfs_device.go b/installer/dual_rootfs_device.go
+index c53bbd1..e331293 100644
+--- a/installer/dual_rootfs_device.go
++++ b/installer/dual_rootfs_device.go
+@@ -190,6 +190,15 @@ func (d *dualRootfsDeviceImpl) getInactivePartition() (string, string, error) {
+ 	partitionNumberDecStr := inactivePartition[len(strings.TrimRight(inactivePartition, "0123456789")):]
+ 	partitionNumberDec, err := strconv.Atoi(partitionNumberDecStr)
+ 	if err != nil {
++		// XXX
++		// Using fake partition numbers 0 and 1 for handling
++		// dm-crypt rootfs partitions
++		// XXX
++		if inactivePartition == d.rootfsPartA {
++			return "0", "0", nil
++		} else if inactivePartition == d.rootfsPartB {
++			return "1", "1", nil
++		}
+ 		return "", "", errors.New("Invalid inactive partition: " + inactivePartition)
+ 	}
+ 
+-- 
+2.26.2
+
