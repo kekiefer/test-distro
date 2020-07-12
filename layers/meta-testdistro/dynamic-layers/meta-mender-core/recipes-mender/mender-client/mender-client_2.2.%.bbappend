@@ -1,8 +1,10 @@
-SRC_REPO = "github.com/madisongh/mender.git;protocol=https"
-SRC_URI = "git://${SRC_REPO};branch=2.2.x"
-SRCREV = "${AUTOREV}"
-PV .= "+git${SRCPV}"
+PATCHDIR = "${S}/src/${GO_IMPORT}"
+
+SRC_URI_append_tegra = " \
+    file://0001-dual_rootfs_device-allow-for-rootfs-devices-that-do-.patch;patchdir=${PATCHDIR} \
+    file://0002-mender-device-identity-skip-dummyX-interfaces.patch;patchdir=${PATCHDIR} \
+    file://0003-mender.service-update-to-run-after-network-online.ta.patch;patchdir=${PATCHDIR} \
+"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
 SRC_URI_append_signing = " file://artifact-verify-key.pem"
-LIC_FILES_CHKSUM = "file://src/github.com/mendersoftware/mender/LIC_FILES_CHKSUM.sha256;md5=80ba3790b689991e47685da401fd3375"

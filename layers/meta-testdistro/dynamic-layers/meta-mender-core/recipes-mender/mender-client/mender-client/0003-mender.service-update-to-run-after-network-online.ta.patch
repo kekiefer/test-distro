@@ -1,0 +1,26 @@
+From 156d70cc5dbfb77d45712f348eec3cbf92692f46 Mon Sep 17 00:00:00 2001
+From: Matt Madison <matt@madison.systems>
+Date: Sat, 28 Dec 2019 07:00:28 -0800
+Subject: [PATCH 3/3] mender.service: update to run after network-online.target
+
+Signed-off-by: Matt Madison <matt@madison.systems>
+---
+ support/mender.service | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/support/mender.service b/support/mender.service
+index c75cf88..b8a5a64 100644
+--- a/support/mender.service
++++ b/support/mender.service
+@@ -1,6 +1,7 @@
+ [Unit]
+ Description=Mender OTA update service
+-After=systemd-resolved.service
++Wants=network-online.target
++After=systemd-resolved.service network-online.target
+ 
+ [Service]
+ Type=idle
+-- 
+2.26.2
+
