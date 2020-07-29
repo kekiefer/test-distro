@@ -1,17 +1,28 @@
-From 156d70cc5dbfb77d45712f348eec3cbf92692f46 Mon Sep 17 00:00:00 2001
+From 21bd80defaef4b8660013323d7c34ac1b4aee7f9 Mon Sep 17 00:00:00 2001
 From: Matt Madison <matt@madison.systems>
 Date: Sat, 28 Dec 2019 07:00:28 -0800
 Subject: [PATCH 3/3] mender.service: update to run after network-online.target
 
+Mender client startup may happen before the network is ready, so
+it can't actually reach the server. It will wait its normal polling
+interval to try again, but that's usually on the order of many minutes.
+
+This change adds a weak dependency on the network-online.target and
+orders itself after this target. This way, the system's regular checks
+for network online will be run before the mender client starts.
+
+Changelog: Title
+
 Signed-off-by: Matt Madison <matt@madison.systems>
+Signed-off-by: Kurt Kiefer <kekiefer@gmail.com>
 ---
- support/mender.service | 3 ++-
+ support/mender-client.service | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/support/mender.service b/support/mender.service
+diff --git a/support/mender-client.service b/support/mender-client.service
 index c75cf88..b8a5a64 100644
---- a/support/mender.service
-+++ b/support/mender.service
+--- a/support/mender-client.service
++++ b/support/mender-client.service
 @@ -1,6 +1,7 @@
  [Unit]
  Description=Mender OTA update service
