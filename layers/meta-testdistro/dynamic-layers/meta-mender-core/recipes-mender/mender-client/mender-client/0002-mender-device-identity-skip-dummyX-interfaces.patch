@@ -1,11 +1,21 @@
-From 12a62f2268ff0d1572fd8bbea0cc2946e8683006 Mon Sep 17 00:00:00 2001
+From d4b84efc453486d44e43447788170d1f700fb57e Mon Sep 17 00:00:00 2001
 From: Matt Madison <matt@madison.systems>
 Date: Sat, 28 Dec 2019 05:47:09 -0800
 Subject: [PATCH 2/3] mender-device-identity: skip dummyX interfaces
 
-which are virtual interfaces, not suitable for device identity.
+This fixes an issue where driver initialization happened to order
+the interfaces such that dummy0 showed up before a real network
+interface, resulting in an invalid identity.
+
+These are virtual interfaces, not suitable for device identity.
+It may be unusual for an embedded system (or any system, for that
+matter) to include CONFIG_DUMMY in their kernel configuration, but
+if it does, its MAC address shouldn't be used as a device identifier.
+
+Changelog: Title
 
 Signed-off-by: Matt Madison <matt@madison.systems>
+Signed-off-by: Kurt Kiefer <kekiefer@gmail.com>
 ---
  support/mender-device-identity | 5 +++++
  1 file changed, 5 insertions(+)
