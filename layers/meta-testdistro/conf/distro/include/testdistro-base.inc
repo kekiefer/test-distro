@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 DISTRO = "testdistro"
 DISTRO_NAME = "Test Distro"
 DISTRO_VERSION = "3.1"
@@ -109,6 +108,3 @@ IMAGE_CLASSES_append_tegra = " tegrasign"
 PREFERRED_PROVIDER_virtual/secure-os_tegra186 = "tos-keystore"
 PREFERRED_PROVIDER_virtual/secure-os_tegra194 = "tos-keystore"
 PREFERRED_RPROVIDER_libdevmapper = "lvm2"
-=======
-require conf/distro/include/testdistro-base.inc
->>>>>>> 8615881... Add testdistro-mender with initial mender configuration
