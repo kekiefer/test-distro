@@ -77,7 +77,7 @@ clean_up()
 
 # get command line options
 SHORTOPTS="hm:d:b:c:"
-LONGOPTS="help,machine,distro,color"
+LONGOPTS="help,machine:,distro:,color:"
 
 ARGS=$(getopt --options $SHORTOPTS  \
   --longoptions $LONGOPTS --name $PROGNAME -- "$@" )
